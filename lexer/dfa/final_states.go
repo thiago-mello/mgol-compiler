@@ -1,25 +1,27 @@
 package dfa
 
+import "github.com/thiago-mello/mgol-compiler/lexer/dfa/classes"
+
 var finalStates = map[int]string{
-	1:  "OPR",
-	2:  "id",
-	3:  "OPR",
-	4:  "OPR",
-	5:  "OPR",
-	6:  "OPR",
-	7:  "RCB",
-	8:  "OPM",
-	9:  "AB_P",
-	10: "FC_P",
-	12: "Lit",
-	13: "EOF",
-	15: "Comentario",
-	16: "Num",
-	19: "Num Real",
-	21: "PT_V",
-	22: "VIR",
-	24: "Num",
-	26: "Num Real",
+	1:  classes.LOGICAL_OPERATION,
+	2:  classes.IDENTIFICATION_NAME,
+	3:  classes.LOGICAL_OPERATION,
+	4:  classes.LOGICAL_OPERATION,
+	5:  classes.LOGICAL_OPERATION,
+	6:  classes.LOGICAL_OPERATION,
+	7:  classes.ASSIGNMENT_OPERATOR,
+	8:  classes.ARITHMETIC_OPERATORS,
+	9:  classes.OPEN_PARENTHESES,
+	10: classes.CLOSE_PARENTHESES,
+	12: classes.LITERAL_CONSTANT,
+	13: classes.END_OF_FILE,
+	15: classes.COMMENT,
+	16: classes.NUMERIC_CONSTANT_INT,
+	19: classes.NUMERIC_CONSTANT_FLOAT,
+	21: classes.SEMICOLON,
+	22: classes.COMMA,
+	24: classes.NUMERIC_CONSTANT_INT,
+	26: classes.NUMERIC_CONSTANT_FLOAT,
 }
 
 func GetStateLabel(state int) (string, bool) {
