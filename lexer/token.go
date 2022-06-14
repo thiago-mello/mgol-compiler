@@ -1,4 +1,4 @@
-package dfa
+package lexer
 
 import "fmt"
 

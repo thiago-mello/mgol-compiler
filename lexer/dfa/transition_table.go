@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/thiago-mello/mgol-compiler/lexer/alphabet"
+	"github.com/thiago-mello/mgol-compiler/alphabet"
 )
 
 var transitionTable = [27][26]int{
