@@ -2,9 +2,9 @@ package dfa
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/thiago-mello/mgol-compiler/alphabet"
+	"github.com/thiago-mello/mgol-compiler/lexer/e"
 )
 
 var transitionTable = [27][26]int{
@@ -39,12 +39,12 @@ var transitionTable = [27][26]int{
 
 func StateTransition(currentState int, symbol rune) (int, error) {
 	if currentState > cap(transitionTable) {
-		return -1, errors.New("current state index is not valid")
+		return -1, errors.New(e.INVALID_STATE_INDEX)
 	}
 
 	symbolIndex, ok := alphabet.GetRuneIndex(symbol)
 	if !ok {
-		return -1, fmt.Errorf("%c is not a valid char", symbol)
+		return -1, errors.New(e.ERROR_INVALID_SYMBOL)
 	}
 
 	return transitionTable[currentState][symbolIndex], nil
