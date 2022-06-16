@@ -20,7 +20,7 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 	for {
 
 		char, _, eofErr := sourceReader.ReadRune()
-		if eofErr != nil && lexeme != "" { //EOF reached and identified lexeme
+		if eofErr != nil && lexeme != "" { //EOF reached and lexeme not parsed yet
 			token, ok := getToken(currentState, lexeme, *row, *column)
 
 			sourceReader.UnreadRune()
@@ -28,7 +28,7 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 		}
 
 		if eofErr != nil { //EOF
-			return core.Token{Class: classes.END_OF_FILE}, true
+			return core.Token{Class: classes.END_OF_FILE, Lexeme: classes.END_OF_FILE}, true
 		}
 
 		if isNewline(char) {
