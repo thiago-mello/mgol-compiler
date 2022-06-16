@@ -2,9 +2,7 @@ package lexer
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
-	"log"
 	"strings"
 
 	"github.com/thiago-mello/mgol-compiler/core"
@@ -14,7 +12,7 @@ import (
 	"github.com/thiago-mello/mgol-compiler/symboltable"
 )
 
-func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, bool, error) {
+func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, bool) {
 	var (
 		currentState int
 		lexeme       string
@@ -23,15 +21,14 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 
 		char, _, eofErr := sourceReader.ReadRune()
 		if eofErr != nil && lexeme != "" { //EOF reached and identified lexeme
-			token, ok, err := getToken(currentState, lexeme, *row, *column)
+			token, ok := getToken(currentState, lexeme, *row, *column)
 
 			sourceReader.UnreadRune()
-			return token, ok, err
+			return token, ok
 		}
 
-		if eofErr != nil {
-			log.Fatal("EOF")
-			return core.Token{Class: "EOF"}, true, e.EndOfFileReachedError(e.END_OF_FILE_REACHED)
+		if eofErr != nil { //EOF
+			return core.Token{Class: classes.END_OF_FILE}, true
 		}
 
 		if isNewline(char) {
@@ -60,16 +57,18 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 	}
 }
 
-func getToken(currentState int, lexeme string, row int, column int) (core.Token, bool, error) {
+func getToken(currentState int, lexeme string, row int, column int) (core.Token, bool) {
 	label, ok := dfa.GetStateLabel(currentState)
 	if !ok {
 		msg := e.GetErrorMsg(e.ERROR_INVALID_WORD, row, column)
-		return core.Token{}, false, errors.New(msg)
+		fmt.Println(msg)
+
+		return core.Token{}, false
 	}
 
 	token, ok := parseState(label, lexeme)
 
-	return token, ok, nil
+	return token, ok
 }
 
 func parseState(label string, lexeme string) (core.Token, bool) {
@@ -110,10 +109,6 @@ func parseState(label string, lexeme string) (core.Token, bool) {
 			Lexeme: lexeme,
 		}, true
 	}
-}
-
-func isSpaceOrTab(char rune) bool {
-	return char == ' ' || char == '\t'
 }
 
 func isNewline(char rune) bool {
