@@ -29,6 +29,9 @@ var alphabet = map[rune]int{
 	'=':  23,
 	'"':  24,
 	'_':  25,
+	' ':  26,
+	'\t': 26,
+	'\n': 26,
 }
 
 func GetRuneIndex(char rune) (int, bool) {
