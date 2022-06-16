@@ -13,5 +13,5 @@ const (
 )
 
 func GetErrorMsg(errorMessage string, row int, column int) string {
-	return fmt.Sprintf("ERRO LÉXICO - %s, linha %d, coluna %d\n", errorMessage, row, column)
+	return fmt.Sprintf("ERRO LÉXICO - %s, linha %d, coluna %d", errorMessage, row, column)
 }

@@ -3,6 +3,7 @@ package lexer
 import (
 	"bufio"
 	"errors"
+	"fmt"
 	"log"
 	"strings"
 
@@ -40,9 +41,14 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 
 		tempState, stateTransitionError := dfa.StateTransition(currentState, char)
 
-		if stateTransitionError != nil || tempState < 0 {
-			sourceReader.UnreadRune()
+		if stateTransitionError != nil {
+			defer fmt.Println(e.GetErrorMsg(stateTransitionError.Error(), *row, *column))
 
+			return getToken(currentState, lexeme, *row, *column)
+		}
+
+		if tempState < 0 {
+			sourceReader.UnreadRune()
 			return getToken(currentState, lexeme, *row, *column)
 		}
 
