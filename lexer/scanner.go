@@ -31,11 +31,6 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 			return core.Token{Class: classes.END_OF_FILE, Lexeme: classes.END_OF_FILE}, true
 		}
 
-		if isNewline(char) {
-			(*row)++
-			*column = 0
-		}
-
 		tempState, stateTransitionError := dfa.StateTransition(currentState, char)
 
 		if stateTransitionError != nil {
@@ -54,6 +49,11 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 			lexeme += string(char)
 		}
 		(*column)++
+
+		if isNewline(char) {
+			(*row)++
+			*column = 0
+		}
 	}
 }
 
