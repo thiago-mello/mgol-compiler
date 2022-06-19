@@ -40,7 +40,10 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 		}
 
 		if tempState < 0 {
-			sourceReader.UnreadRune()
+			if lexeme != "" {
+				sourceReader.UnreadRune()
+			}
+
 			return getToken(currentState, lexeme, *row, *column)
 		}
 
