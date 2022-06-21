@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/thiago-mello/mgol-compiler/alphabet"
 	"github.com/thiago-mello/mgol-compiler/core"
 	"github.com/thiago-mello/mgol-compiler/lexer/dfa"
 	"github.com/thiago-mello/mgol-compiler/lexer/dfa/classes"
@@ -29,6 +30,16 @@ func Scanner(sourceReader *bufio.Reader, row *int, column *int) (core.Token, boo
 
 		if eofErr != nil { //EOF
 			return core.Token{Class: classes.END_OF_FILE, Lexeme: classes.END_OF_FILE}, true
+		}
+
+		if _, ok := alphabet.GetRuneIndex(char); !ok {
+			fmt.Println(e.GetErrorMsg(e.ERROR_INVALID_SYMBOL, *row, *column))
+
+			if lexeme != "" {
+				return getToken(currentState, lexeme, *row, *column)
+			}
+
+			return core.Token{}, false
 		}
 
 		tempState, stateTransitionError := dfa.StateTransition(currentState, char)
