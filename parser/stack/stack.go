@@ -22,7 +22,7 @@ func (s *Stack) PopMultiple(n int) ([]int, bool) {
 		return nil, false
 	}
 
-	pop := make([]int, 25)
+	var pop = make([]int, 0, 25)
 	index := len(*s) - 1
 
 	for i := 0; i < n; i++ {
