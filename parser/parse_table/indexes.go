@@ -29,10 +29,35 @@ var actionIndexes = map[string]int{
 	"fimrepita": 23,
 	"fim":       24,
 	"EOF":       25,
+	"P":         1,
+	"V":         2,
+	"LV":        3,
+	"D":         4,
+	"L":         5,
+	"TIPO":      6,
+	"A":         7,
+	"ES":        8,
+	"ARG":       9,
+	"CMD":       10,
+	"LD":        11,
+	"OPRD":      12,
+	"COND":      13,
+	"CAB":       14,
+	"EXP_R":     15,
+	"CP":        16,
+	"R":         17,
+	"CABR":      18,
+	"CPR":       19,
 }
 
 func GetTokenIndex(token core.Token) (int, bool) {
 	index, ok := actionIndexes[token.Class]
+
+	return index, ok
+}
+
+func GetNonTerminalIndex(nonTerminal string) (int, bool) {
+	index, ok := actionIndexes[nonTerminal]
 
 	return index, ok
 }

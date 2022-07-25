@@ -1,6 +1,8 @@
 package grammar
 
-import "strings"
+import (
+	"strings"
+)
 
 var rules = [38]string{
 	"P -> inicio V A",
@@ -44,9 +46,10 @@ var rules = [38]string{
 }
 
 type GrammarRule struct {
-	Rule  string
-	Left  string
-	Right string
+	Rule            string
+	Left            string
+	Right           string
+	NumberOfSymbols int
 }
 
 func GetRule(index int) GrammarRule {
@@ -55,8 +58,9 @@ func GetRule(index int) GrammarRule {
 	ruleSplit := strings.Split(rule, " -> ")
 
 	return GrammarRule{
-		Rule:  rule,
-		Left:  ruleSplit[0],
-		Right: ruleSplit[1],
+		Rule:            rule,
+		Left:            ruleSplit[0],
+		Right:           ruleSplit[1],
+		NumberOfSymbols: len(strings.Split(ruleSplit[1], " ")),
 	}
 }

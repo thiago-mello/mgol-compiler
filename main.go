@@ -1,7 +1,5 @@
 package main
 
-import "github.com/thiago-mello/mgol-compiler/parser/parse_table/actions"
-
 // "errors"
 // "fmt"
 // "log"
@@ -41,6 +39,4 @@ func main() {
 	// 		endOfFileReached = true
 	// 	}
 	// }
-
-	actions.Action()
 }
