@@ -2,6 +2,7 @@ package actions
 
 import (
 	"encoding/csv"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -77,6 +78,7 @@ func parseActionString(action string) ParseAction {
 func Action(state int, token core.Token) (ParseAction, bool) {
 	var isInvalidState = state < 0 || state >= len(actionsMatrix)
 	if isInvalidState {
+		fmt.Println("Invalid state", state)
 		return ParseAction{}, false
 	}
 

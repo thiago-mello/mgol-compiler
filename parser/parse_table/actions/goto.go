@@ -2,6 +2,7 @@ package actions
 
 import (
 	"encoding/csv"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
@@ -50,11 +51,13 @@ func parseGoToString(gotoString string) int {
 func GoTo(state int, nonTerminal string) int {
 	var isInvalidState = state < 0 || state >= len(goToMatrix)
 	if isInvalidState {
+		fmt.Println("Invalid goto state", state)
 		return -1
 	}
 
 	columnIndex, ok := parse_table.GetNonTerminalIndex(nonTerminal)
 	if !ok {
+		fmt.Println("Invalid nonterminal '" + nonTerminal + "'")
 		return -1
 	}
 

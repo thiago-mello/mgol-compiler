@@ -32,3 +32,11 @@ func (s *Stack) PopMultiple(n int) ([]int, bool) {
 
 	return pop, true
 }
+
+func (s *Stack) PeekTop() (int, bool) {
+	if len(*s) == 0 {
+		return 0, false
+	}
+
+	return (*s)[len(*s)-1], true
+}
