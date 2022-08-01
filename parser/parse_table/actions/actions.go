@@ -51,6 +51,10 @@ func parseActionString(action string) ParseAction {
 		}
 	}
 
+	if action == "" {
+		return ParseAction{Action: "error"}
+	}
+
 	splitString := strings.Split(action, ".")
 	actionNumber, err := strconv.Atoi(splitString[1])
 	if err != nil {
