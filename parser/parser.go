@@ -7,7 +7,6 @@ import (
 
 	"github.com/thiago-mello/mgol-compiler/core"
 	"github.com/thiago-mello/mgol-compiler/lexer"
-	"github.com/thiago-mello/mgol-compiler/parser/grammar"
 	"github.com/thiago-mello/mgol-compiler/parser/parse_table/actions"
 	"github.com/thiago-mello/mgol-compiler/parser/stack"
 )
@@ -51,7 +50,6 @@ func Parse(reader *bufio.Reader) {
 			fmt.Println(action.Rule.Rule)
 		case "accept":
 			accepted = true
-			fmt.Println(grammar.GetRule(0).Rule)
 		default:
 			fmt.Printf("Erro sintático na coluna %d e linha %d\n", *column, *row)
 		}

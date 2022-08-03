@@ -4,7 +4,8 @@ import (
 	"strings"
 )
 
-var rules = [38]string{
+var rules = [39]string{
+	"P' -> P",
 	"P -> inicio V A",
 	"V -> varinicio LV",
 	"LV -> D LV",
