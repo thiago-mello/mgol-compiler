@@ -52,7 +52,7 @@ func Parse(reader *bufio.Reader) {
 		case "accept":
 			accepted = true
 		default:
-			e.GetErrorMsg(s, *row, *column)
+			log.Fatal(e.GetErrorMsg(s, *row, *column))
 		}
 	}
 

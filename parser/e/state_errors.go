@@ -46,5 +46,11 @@ var errors = map[int]string{
 }
 
 func GetErrorMsg(state int, row int, column int) string {
-	return fmt.Sprintf("ERRO SINTÁTICO - %s na linha %d e coluna %d", errors[state], row, column)
+	expectedMessage := errors[state]
+
+	if expectedMessage == "" {
+		expectedMessage = "Símbolo inesperado"
+	}
+
+	return fmt.Sprintf("ERRO SINTÁTICO - %s na linha %d e coluna %d", expectedMessage, row, column)
 }
