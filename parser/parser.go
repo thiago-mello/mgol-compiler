@@ -7,6 +7,7 @@ import (
 
 	"github.com/thiago-mello/mgol-compiler/core"
 	"github.com/thiago-mello/mgol-compiler/lexer"
+	"github.com/thiago-mello/mgol-compiler/parser/e"
 	"github.com/thiago-mello/mgol-compiler/parser/parse_table/actions"
 	"github.com/thiago-mello/mgol-compiler/parser/stack"
 )
@@ -51,7 +52,7 @@ func Parse(reader *bufio.Reader) {
 		case "accept":
 			accepted = true
 		default:
-			fmt.Printf("Erro sintático na coluna %d e linha %d\n", *column, *row)
+			e.GetErrorMsg(s, *row, *column)
 		}
 	}
 
