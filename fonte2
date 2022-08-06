@@ -1,0 +1,9 @@
+inicio
+    varinicio
+        inteiro B;
+    varfim;
+    se(B>2)
+    entao
+        escreva "B esta entre 2 e 4";
+    fimse
+fim

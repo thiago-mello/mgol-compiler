@@ -22,6 +22,7 @@ func Parse(reader *bufio.Reader) {
 	stateStack.Push(initialState)
 
 	accepted := false
+	printedError := false
 
 	for !accepted {
 		s, ok := stateStack.PeekTop()
@@ -38,6 +39,7 @@ func Parse(reader *bufio.Reader) {
 		case "shift":
 			stateStack.Push(action.State)
 			a = getNextValidToken(reader, row, column)
+			printedError = false
 		case "reduce":
 			stateStack.PopMultiple(action.Rule.NumberOfSymbols)
 			t, ok := stateStack.PeekTop()
@@ -49,10 +51,19 @@ func Parse(reader *bufio.Reader) {
 			stateStack.Push(goTo)
 
 			fmt.Println(action.Rule.Rule)
+			printedError = false
 		case "accept":
 			accepted = true
 		default:
-			log.Fatal(e.GetErrorMsg(s, *row, *column))
+			if !printedError {
+				fmt.Println(e.GetErrorMsg(s, *row, *column))
+				printedError = true
+			}
+			a = getNextValidToken(reader, row, column)
+			if a.Class == "EOF" {
+				fmt.Println("não foi possível encontrar um operador esperado. Encerrando a análise")
+				accepted = true
+			}
 		}
 	}
 

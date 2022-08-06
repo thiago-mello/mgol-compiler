@@ -36,6 +36,8 @@ var errors = map[int]string{
 	50: "Esperava o símbolo ','",
 	53: "Esperava o símbolo ';'",
 	54: "Esperava uma operação matemática",
+	55: "Esperava um operador lógico, matemático, símolo ')' ou símbolo ';'",
+	56: "Esperava um operador lógico, matemático, símolo ')' ou símbolo ';'",
 	63: "Esperava o símbolo ')'",
 	64: "Esperava uma operação lógica",
 	65: "Esperava o símbolo ')'",
