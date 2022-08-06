@@ -53,8 +53,17 @@ func Parse(reader *bufio.Reader) {
 
 			fmt.Println(action.Rule.Rule)
 			printedError = false
+
 		case "accept":
 			accepted = true
+
+		case "error":
+			stateStack.Push(action.State)
+			if !printedError {
+				colors.PrintColored(e.GetErrorMsg(s, *row, *column), colors.RED)
+				printedError = true
+			}
+
 		default:
 			if !printedError {
 				colors.PrintColored(e.GetErrorMsg(s, *row, *column), colors.RED)

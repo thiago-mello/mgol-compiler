@@ -1,7 +1,7 @@
 state,inicio,varinicio,varfim,PT_V,id,VIR,inteiro,real,literal,leia,escreva,Lit,Num,RCB,OPM,se,AB_P,FC_P,entao,OPR,fimse,repita,fimrepita,fim,EOF
-0,s.2,,,,,,,,,,,,,,,,,,,,,,,,
+0,s.2,e.2,e.2,,,,,,,,,,,,,,,,,,,,,,
 1,,,,,,,,,,,,,,,,,,,,,,,,,acc
-2,,s.4,,,,,,,,,,,,,,,,,,,,,,,
+2,,s.4,e.4,,,,,,,,,,,,,,,,,,,,,,
 3,,,,,s.13,,,,,s.11,s.12,,,,,s.16,,,,,,s.17,,s.10,
 4,,,s.20,,,,s.22,s.23,s.24,,,,,,,,,,,,,,,,
 5,,,,,,,,,,,,,,,,,,,,,,,,,r.1

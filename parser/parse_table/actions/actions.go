@@ -52,7 +52,7 @@ func parseActionString(action string) ParseAction {
 	}
 
 	if action == "" {
-		return ParseAction{Action: "error"}
+		return ParseAction{}
 	}
 
 	splitString := strings.Split(action, ".")
@@ -72,6 +72,12 @@ func parseActionString(action string) ParseAction {
 		return ParseAction{
 			Action: "reduce",
 			Rule:   grammar.GetRule(actionNumber),
+		}
+
+	case "e":
+		return ParseAction{
+			Action: "error",
+			State:  actionNumber,
 		}
 
 	default:
