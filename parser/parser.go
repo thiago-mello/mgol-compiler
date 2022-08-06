@@ -10,6 +10,7 @@ import (
 	"github.com/thiago-mello/mgol-compiler/parser/e"
 	"github.com/thiago-mello/mgol-compiler/parser/parse_table/actions"
 	"github.com/thiago-mello/mgol-compiler/parser/stack"
+	"github.com/thiago-mello/mgol-compiler/utils/colors"
 )
 
 func Parse(reader *bufio.Reader) {
@@ -56,12 +57,12 @@ func Parse(reader *bufio.Reader) {
 			accepted = true
 		default:
 			if !printedError {
-				fmt.Println(e.GetErrorMsg(s, *row, *column))
+				colors.PrintColored(e.GetErrorMsg(s, *row, *column), colors.RED)
 				printedError = true
 			}
 			a = getNextValidToken(reader, row, column)
 			if a.Class == "EOF" {
-				fmt.Println("não foi possível encontrar um operador esperado. Encerrando a análise")
+				colors.PrintColored("não foi possível encontrar um operador esperado. Encerrando a análise", colors.RED)
 				accepted = true
 			}
 		}
