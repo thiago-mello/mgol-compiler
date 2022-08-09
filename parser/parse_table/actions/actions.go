@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/thiago-mello/mgol-compiler/core"
+	"github.com/thiago-mello/mgol-compiler/parser/e"
 	"github.com/thiago-mello/mgol-compiler/parser/grammar"
 	"github.com/thiago-mello/mgol-compiler/parser/parse_table"
 )
@@ -26,19 +27,19 @@ func getActionsMatrix() [][]string {
 
 	file, err := os.Open(filepath)
 	if err != nil {
-		log.Fatal("error opening actions.csv file")
+		log.Fatal(e.ERROR_ACTIONS_FILE)
 	}
 
 	defer file.Close()
 
 	reader := csv.NewReader(file)
 	if _, err := reader.Read(); err != nil {
-		log.Fatal("could not read header from actions.csv")
+		log.Fatal(e.ERROR_ACTIONS_FILE)
 	}
 
 	actions, err := reader.ReadAll()
 	if err != nil {
-		log.Fatal("could not parse actions definition")
+		log.Fatal(e.ERROR_ACTIONS_FILE)
 	}
 
 	return actions
@@ -58,7 +59,7 @@ func parseActionString(action string) ParseAction {
 	splitString := strings.Split(action, ".")
 	actionNumber, err := strconv.Atoi(splitString[1])
 	if err != nil {
-		log.Fatal("invalid actions.csv file")
+		log.Fatal(e.ERROR_ACTIONS_FILE)
 	}
 
 	switch splitString[0] {
@@ -88,7 +89,7 @@ func parseActionString(action string) ParseAction {
 func Action(state int, token core.Token) (ParseAction, bool) {
 	var isInvalidState = state < 0 || state >= len(actionsMatrix)
 	if isInvalidState {
-		fmt.Println("Invalid state", state)
+		fmt.Println(e.ERROR_INVALID_STATE, state)
 		return ParseAction{}, false
 	}
 

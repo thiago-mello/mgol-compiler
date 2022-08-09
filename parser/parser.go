@@ -28,12 +28,12 @@ func Parse(reader *bufio.Reader) {
 	for !accepted {
 		s, ok := stateStack.PeekTop()
 		if !ok {
-			log.Fatal("cannot continue syntactic analisys due to invalid stack indexes")
+			log.Fatal(e.ERROR_STACK_INDEX)
 		}
 
 		action, ok := actions.Action(s, a)
 		if !ok {
-			log.Fatal("cannot continue syntactic analisys due to invalid action indexes")
+			log.Fatal(e.ERROR_ACTIONS_INDEX)
 		}
 
 		switch action.Action {
@@ -45,7 +45,7 @@ func Parse(reader *bufio.Reader) {
 			stateStack.PopMultiple(action.Rule.NumberOfSymbols)
 			t, ok := stateStack.PeekTop()
 			if !ok {
-				log.Fatal("cannot continue syntactic analisys due to invalid stack indexes")
+				log.Fatal(e.ERROR_STACK_INDEX)
 			}
 
 			goTo := actions.GoTo(t, action.Rule.Left)
@@ -71,7 +71,7 @@ func Parse(reader *bufio.Reader) {
 			}
 			a = getNextValidToken(reader, row, column)
 			if a.Class == "EOF" {
-				colors.PrintColored("não foi possível encontrar um operador esperado. Encerrando a análise", colors.RED)
+				colors.PrintColored(e.ERROR_PANIC_END, colors.RED)
 				accepted = true
 			}
 		}
