@@ -15,6 +15,7 @@ import (
 
 func Parse(reader *bufio.Reader) {
 	row, column := new(int), new(int)
+	*row = 1
 
 	var stateStack stack.Stack
 	const initialState = 0

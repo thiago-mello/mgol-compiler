@@ -7,14 +7,8 @@ inicio
         escreva C;
         leia C;
         B<-B+1;
-        repita (B<5)
-        C<-B+2;
-        escreva C;
-        leia C;
-        B<-B+1;
-        fimrepita
     fimrepita
-    se (B<2)
+    se (B>2)
     entao
         escreva "B esta entre 2 e 4";
     fimse
